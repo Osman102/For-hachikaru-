@@ -24,7 +24,6 @@
       text-align: center;
       box-shadow: 0 15px 40px rgba(0,0,0,0.25);
       z-index: 2;
-      animation: fadeIn 1s ease;
     }
 
     h1, h2 {
@@ -61,20 +60,11 @@
       color: #777;
     }
 
-    .hidden {
-      display: none;
-    }
-
-    /* Animations */
+    /* Pulse animation */
     @keyframes pulse {
       0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(127,90,240,.6); }
       70% { transform: scale(1.05); box-shadow: 0 0 0 14px rgba(127,90,240,0); }
       100% { transform: scale(1); }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
     }
 
     /* Floating hearts */
@@ -92,22 +82,20 @@
       20% { opacity: 0.6; }
       100% { transform: translateY(-110vh); opacity: 0; }
     }
+
+    .hidden {
+      display: none;
+    }
   </style>
 </head>
-
 <body onclick="playMusic()">
 
-  <!-- Hidden YouTube Player (Black Friday – Tom Odell) -->
-  <iframe
-    id="ytplayer"
-    width="0"
-    height="0"
-    src="https://www.youtube.com/embed/1o1nXy1cJr8?enablejsapi=1&autoplay=0&loop=1&playlist=1o1nXy1cJr8"
-    frameborder="0"
-    allow="autoplay">
-  </iframe>
+  <!-- Background Music -->
+  <audio id="music" loop>
+    <source src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tom_Odell/Black_Friday/Tom_Odell_-_Black_Friday.mp3" type="audio/mpeg">
+  </audio>
 
-  <!-- PAGE 1 -->
+  <!-- Page 1 -->
   <div class="card" id="page1">
     <h1>Hey Hachikaru 💜</h1>
 
@@ -137,26 +125,21 @@
     <div class="footer">— Runo 💜</div>
   </div>
 
-  <!-- PAGE 2 (YES RESULT) -->
+  <!-- Page 2 -->
   <div class="card hidden" id="page2">
-    <h1>She said YES 💜</h1>
-
+    <h1>Thank you 💜</h1>
     <p>
-      This means more to me than I can put into words.
+      No matter your answer, I’m really glad you took the time to read this.
     </p>
-
     <p>
-      Thank you for choosing me, Hachikaru.
-      I promise to cherish you and always be honest with you.
+      You truly matter to me, Hachikaru.
     </p>
-
-    <h2 style="font-size:32px;">💜💜💜</h2>
-
-    <div class="footer">— Runo 💜</div>
+    <h2>💜</h2>
+    <div class="footer">— Runo</div>
   </div>
 
   <script>
-    /* Floating hearts */
+    // Floating hearts
     setInterval(() => {
       const heart = document.createElement("div");
       heart.className = "heart";
@@ -167,15 +150,11 @@
       setTimeout(() => heart.remove(), 6000);
     }, 500);
 
-    /* Music play on first tap */
+    // Music play (mobile-friendly)
     function playMusic() {
-      const iframe = document.getElementById("ytplayer");
-      if (iframe.src.includes("autoplay=0")) {
-        iframe.src = iframe.src.replace("autoplay=0", "autoplay=1");
-      }
-    }
-
-    /* YES button behavior */
+      const music = document.getElemeq
+      
+    // Yes button action
     function yesClicked(event) {
       event.stopPropagation();
       document.getElementById("page1").classList.add("hidden");
@@ -184,4 +163,4 @@
   </script>
 
 </body>
-</html>
+  </html>

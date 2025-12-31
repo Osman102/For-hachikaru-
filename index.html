@@ -3,109 +3,102 @@
 <head>
   <meta charset="UTF-8">
   <title>For Hachikaru 💜</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- STYLE -->
   <style>
     body {
-      background: linear-gradient(135deg, #7f5af0, #c77dff);
-      font-family: 'Segoe UI', sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
       margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #7b2cbf, #9d4edd);
+      height: 100vh;
       overflow: hidden;
-      color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .card {
-      background: #ffffff;
-      padding: 35px;
-      border-radius: 25px;
-      max-width: 420px;
+      background: white;
+      width: 320px;
+      padding: 25px;
+      border-radius: 20px;
       text-align: center;
       box-shadow: 0 15px 40px rgba(0,0,0,0.25);
-      z-index: 2;
       animation: fadeIn 1s ease;
     }
 
-    h1, h2 {
-      color: #7f5af0;
+    h1 {
+      color: #7b2cbf;
+      margin-bottom: 10px;
     }
 
     p {
-      font-size: 16px;
+      font-size: 14px;
+      color: #444;
       line-height: 1.6;
     }
 
-    button {
-      margin-top: 15px;
+    .yes-btn {
+      margin-top: 20px;
       padding: 12px 24px;
-      font-size: 16px;
       border: none;
-      border-radius: 30px;
-      cursor: pointer;
-    }
-
-    .yes {
-      background: #7f5af0;
+      border-radius: 25px;
+      background: #7b2cbf;
       color: white;
-      animation: pulse 1.8s infinite;
+      font-size: 16px;
+      cursor: pointer;
+      animation: pulse 1.4s infinite;
     }
 
-    .maybe {
-      background: #eee;
+    .yes-btn:hover {
+      background: #9d4edd;
     }
 
     .footer {
-      margin-top: 20px;
+      margin-top: 15px;
       font-size: 13px;
-      color: #777;
+      color: #7b2cbf;
     }
 
     .hidden {
       display: none;
     }
 
-    /* Animations */
+    /* Hearts */
+    .heart {
+      position: absolute;
+      color: #ff4d6d;
+      font-size: 18px;
+      animation: floatUp 6s linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0); opacity: 0; }
+      20% { opacity: 0.8; }
+      100% { transform: translateY(-110vh); opacity: 0; }
+    }
+
     @keyframes pulse {
-      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(127,90,240,.6); }
-      70% { transform: scale(1.05); box-shadow: 0 0 0 14px rgba(127,90,240,0); }
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
       100% { transform: scale(1); }
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
+      from { opacity: 0; transform: translateY(15px); }
       to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Floating hearts */
-    .heart {
-      position: absolute;
-      bottom: -20px;
-      font-size: 20px;
-      animation: float 6s linear infinite;
-      opacity: 0.6;
-      color: #c77dff;
-    }
-
-    @keyframes float {
-      0% { transform: translateY(0); opacity: 0; }
-      20% { opacity: 0.6; }
-      100% { transform: translateY(-110vh); opacity: 0; }
     }
   </style>
 </head>
 
-<body onclick="playMusic()">
+<body>
 
-  <!-- Hidden YouTube Player (Black Friday – Tom Odell) -->
-  <iframe
-    id="ytplayer"
-    width="0"
-    height="0"
-    src="https://www.youtube.com/embed/1o1nXy1cJr8?enablejsapi=1&autoplay=0&loop=1&playlist=1o1nXy1cJr8"
-    frameborder="0"
-    allow="autoplay">
-  </iframe>
+  <!-- MUSIC -->
+  <audio autoplay loop>
+    <source src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tom_Odell/Black_Friday/Tom_Odell_-_Black_Friday.mp3" type="audio/mpeg">
+  </audio>
 
   <!-- PAGE 1 -->
   <div class="card" id="page1">
@@ -118,70 +111,65 @@
 
     <p>
       Being around you feels easy and natural.
-      You have this calm way of making moments feel lighter,
-      and I really appreciate that about you.
+      You have this calm way of making moments feel lighter.
     </p>
 
     <p>
-      I didn’t want to rush this or keep it unsaid anymore.
-      I just wanted to be honest with you and with myself.
+      I didn’t want to rush this anymore.
+      I just wanted to be honest with you.
     </p>
 
-    <h2>Will you be my girlfriend? 💕</h2>
+    <h3 style="color:#7b2cbf;">Will you be my girlfriend? 💕</h3>
 
-    <button class="yes" onclick="yesClicked(event)">Yes 💜</button>
-    <button class="maybe" onclick="alert('That’s completely okay 💜 Take all the time you need 😊')">
-      Think about it 🤍
-    </button>
+    <button class="yes-btn" onclick="sayYes()">Yes 💜</button>
 
     <div class="footer">— Runo 💜</div>
   </div>
 
-  <!-- PAGE 2 (YES RESULT) -->
+  <!-- PAGE 2 -->
   <div class="card hidden" id="page2">
     <h1>She said YES 💜</h1>
 
     <p>
-      This means more to me than I can put into words.
+      This means more to me than I can explain.
     </p>
 
     <p>
       Thank you for choosing me, Hachikaru.
-      I promise to cherish you and always be honest with you.
+      I promise to cherish you and be honest with you.
     </p>
 
-    <h2 style="font-size:32px;">💜💜💜</h2>
+    <h2>💜💜💜</h2>
 
     <div class="footer">— Runo 💜</div>
   </div>
 
+  <!-- SCRIPT -->
   <script>
-    /* Floating hearts */
-    setInterval(() => {
+    function sayYes() {
+      document.getElementById("page1").classList.add("hidden");
+      document.getElementById("page2").classList.remove("hidden");
+
+      // more hearts
+      for (let i = 0; i < 20; i++) {
+        createHeart();
+      }
+    }
+
+    function createHeart() {
       const heart = document.createElement("div");
       heart.className = "heart";
       heart.innerHTML = "💜";
       heart.style.left = Math.random() * 100 + "vw";
+      heart.style.bottom = "-20px";
       heart.style.fontSize = (14 + Math.random() * 20) + "px";
       document.body.appendChild(heart);
+
       setTimeout(() => heart.remove(), 6000);
-    }, 500);
-
-    /* Music play on first tap */
-    function playMusic() {
-      const iframe = document.getElementById("ytplayer");
-      if (iframe.src.includes("autoplay=0")) {
-        iframe.src = iframe.src.replace("autoplay=0", "autoplay=1");
-      }
     }
 
-    /* YES button behavior */
-    function yesClicked(event) {
-      event.stopPropagation();
-      document.getElementById("page1").classList.add("hidden");
-      document.getElementById("page2").classList.remove("hidden");
-    }
+    setInterval(createHeart, 500);
   </script>
 
 </body>
-</html>
+  </html>

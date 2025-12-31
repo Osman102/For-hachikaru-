@@ -1,165 +1,246 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>For Hachikaru 💜</title>
-  <style>
-    body {
-      background: linear-gradient(135deg, #7f5af0, #c77dff);
-      font-family: 'Segoe UI', sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      overflow: hidden;
-      color: #333;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Hachikaru 💜</title>
 
-    .card {
-      background: #ffffff;
-      padding: 35px;
-      border-radius: 25px;
-      max-width: 420px;
-      text-align: center;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.25);
-      z-index: 2;
-    }
+<style>
+* {
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
 
-    h1, h2 {
-      color: #7f5af0;
-    }
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #8e5cff, #b084ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
 
-    p {
-      font-size: 16px;
-      line-height: 1.6;
-    }
+.hidden {
+  display: none;
+}
 
-    button {
-      margin-top: 15px;
-      padding: 12px 24px;
-      font-size: 16px;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-    }
+.card {
+  background: white;
+  width: 90%;
+  max-width: 420px;
+  padding: 30px 25px;
+  border-radius: 18px;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+  animation: fadeIn 1s ease;
+  z-index: 2;
+}
 
-    .yes {
-      background: #7f5af0;
-      color: white;
-      animation: pulse 1.8s infinite;
-    }
+h1 {
+  color: #7a3cff;
+  margin-bottom: 10px;
+}
 
-    .maybe {
-      background: #eee;
-    }
+p {
+  color: #444;
+  line-height: 1.6;
+  font-size: 15px;
+}
 
-    .footer {
-      margin-top: 20px;
-      font-size: 13px;
-      color: #777;
-    }
+.question {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #7a3cff;
+  font-weight: 600;
+}
 
-    /* Pulse animation */
-    @keyframes pulse {
-      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(127,90,240,.6); }
-      70% { transform: scale(1.05); box-shadow: 0 0 0 14px rgba(127,90,240,0); }
-      100% { transform: scale(1); }
-    }
+.buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
 
-    /* Floating hearts */
-    .heart {
-      position: absolute;
-      bottom: -20px;
-      font-size: 20px;
-      animation: float 6s linear infinite;
-      opacity: 0.6;
-      color: #c77dff;
-    }
+button {
+  border: none;
+  padding: 12px 20px;
+  border-radius: 25px;
+  font-size: 14px;
+  cursor: pointer;
+}
 
-    @keyframes float {
-      0% { transform: translateY(0); opacity: 0; }
-      20% { opacity: 0.6; }
-      100% { transform: translateY(-110vh); opacity: 0; }
-    }
+.yes-btn {
+  background: #7a3cff;
+  color: white;
+  animation: pulse 1.5s infinite;
+}
 
-    .hidden {
-      display: none;
-    }
-  </style>
+.no-btn {
+  background: #eee;
+  color: #555;
+}
+
+.footer {
+  margin-top: 20px;
+  font-size: 13px;
+  color: #888;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+/* Floating hearts */
+.heart {
+  position: absolute;
+  bottom: -20px;
+  color: rgba(255,255,255,0.7);
+  animation: floatUp linear forwards;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes floatUp {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-120vh); opacity: 0; }
+}
+
+/* Confetti */
+.confetti {
+  position: absolute;
+  width: 8px;
+  height: 14px;
+  opacity: 0.9;
+  animation: confettiFall linear forwards;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes confettiFall {
+  from { transform: translateY(0) rotate(0deg); }
+  to { transform: translateY(120vh) rotate(720deg); }
+}
+</style>
 </head>
-<body onclick="playMusic()">
 
-  <audio id="music" loop>
-    <source src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tom_Odell/Black_Friday/Tom_Odell_-_Black_Friday.mp3" type="audio/mpeg">
-  </audio>
+<body>
 
-  <div class="card" id="page1">
-    <h1>Hey Hachikaru 💜</h1>
+<!-- MUSIC (plays on YES only) -->
+<iframe
+  id="music"
+  width="0"
+  height="0"
+  src="https://www.youtube.com/embed/0U-0g7i3Z8Q?enablejsapi=1"
+  frameborder="0"
+  allow="autoplay">
+</iframe>
 
-    <p>
-      I’ve known you for about three years now, and over that time,
-      you’ve slowly become someone I genuinely care about.
-    </p>
+<!-- PAGE 1 -->
+<div class="card" id="page1">
+  <h1>Hey Hachikaru 💜</h1>
 
-    <p>
-      Being around you feels easy and natural.
-      You have this calm way of making moments feel lighter,
-      and I really appreciate that about you.
-    </p>
+  <p>
+    I’ve known you for about three years now, and over that time,
+    you’ve slowly become someone I genuinely care about.
+  </p>
 
-    <p>
-      I didn’t want to rush this or keep it unsaid anymore.
-      I just wanted to be honest with you and with myself.
-    </p>
+  <p>
+    Being around you feels easy and natural.
+    You have this calm way of making moments feel lighter,
+    and I really appreciate that about you.
+  </p>
 
-    <h2>Will you be my girlfriend? 💕</h2>
+  <p>
+    I didn’t want to rush this or keep it unsaid anymore.
+    I just wanted to be honest with you.
+  </p>
 
-    <button class="yes" onclick="yesClicked(event)">Yes 💜</button>
-    <button class="maybe" onclick="alert('That’s completely okay 💜 Take all the time you need 😊')">
-      Think about it 🤍
-    </button>
-
-    <div class="footer">— Runo 💜</div>
+  <div class="question">
+    Will you be my girlfriend? 💕
   </div>
 
-  <div class="card hidden" id="page2">
-    <h1>Thank you 💜</h1>
-    <p>
-      No matter your answer, I’m really glad you took the time to read this.
-    </p>
-    <p>
-      You truly matter to me, Hachikaru.
-    </p>
-    <h2>💜</h2>
-    <div class="footer">— Runo</div>
+  <div class="buttons">
+    <button class="yes-btn" onclick="sayYes()">Yes 💜</button>
+    <button class="no-btn">Think about it</button>
   </div>
 
-  <script>
-    // Floating hearts
-    setInterval(() => {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.innerHTML = "💜";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.fontSize = (14 + Math.random() * 20) + "px";
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 6000);
-    }, 500);
+  <div class="footer">— Runo 💜</div>
+</div>
 
-    // Music play (mobile-friendly)
-    function playMusic() {
-      const music = document.getElementById("music");
-      if (music.paused) music.play();
-    }
+<!-- PAGE 2 -->
+<div class="card hidden" id="page2">
+  <h1>She said YES 💜</h1>
 
-    // Yes button action
-    function yesClicked(event) {
-      event.stopPropagation();
-      document.getElementById("page1").classList.add("hidden");
-      document.getElementById("page2").classList.remove("hidden");
-    }
-  </script>
+  <p>
+    This means more to me than I can put into words.
+  </p>
+
+  <p>
+    Thank you for choosing me, Hachikaru.
+    I promise to cherish you and be honest with you.
+  </p>
+
+  <h2>💜💜💜</h2>
+
+  <div class="footer">— Runo 💜</div>
+</div>
+
+<script>
+function sayYes() {
+  document.getElementById("page1").classList.add("hidden");
+  document.getElementById("page2").classList.remove("hidden");
+  playMusic();
+  startHearts();
+  confettiBurst();
+}
+
+function playMusic() {
+  const iframe = document.getElementById("music");
+  iframe.src += "&autoplay=1";
+}
+
+/* 💜 Continuous hearts */
+function startHearts() {
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "💜";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (14 + Math.random() * 26) + "px";
+    heart.style.animationDuration = (5 + Math.random() * 4) + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 9000);
+  }, 250);
+}
+
+/* 🎉 One-time confetti burst */
+function confettiBurst() {
+  const colors = ["#ffffff", "#e0c3ff", "#b084ff", "#ffd1ff"];
+
+  for (let i = 0; i < 80; i++) {
+    const confetti = document.createElement("div");
+    confetti.className = "confetti";
+    confetti.style.left = Math.random() * 100 + "vw";
+    confetti.style.top = "-10px";
+    confetti.style.backgroundColor =
+      colors[Math.floor(Math.random() * colors.length)];
+    confetti.style.animationDuration = (3 + Math.random() * 3) + "s";
+    document.body.appendChild(confetti);
+
+    setTimeout(() => confetti.remove(), 7000);
+  }
+}
+</script>
 
 </body>
 </html>
